@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Sys = Cosmos.System;
-
+﻿using Sys = Cosmos.System;
+// This file is simply a wrapper for ShellUtil. You could write a similar wrapper in a Console app project.
 namespace HyperOS
 {
-	public class Kernel : Sys.Kernel
+    public class Kernel : Sys.Kernel
 	{
-		ShellUtil commandExecutor;
+        private ShellUtil shellUtil;
 		protected override void BeforeRun()
 		{
-			commandExecutor = new ShellUtil(this);
-			Console.Beep(400, 100);
-			Console.Beep(600, 100);
-			Console.BackgroundColor = ConsoleColor.White;
-			Console.ForegroundColor = ConsoleColor.Black;
-			Console.Clear();
-			Console.WriteLine("Hyper OS booted successfully. Type a command, or type help.");
+			shellUtil = new ShellUtil();
+			shellUtil.InitiallizeSession();
 		}
 
 		protected override void Run()
 		{
 			ShellUtil.ShellPrompt();
 		}
-
-
 
 		
 	}
